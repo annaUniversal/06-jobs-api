@@ -30,10 +30,19 @@ UserSchima.pre("save", async function () {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-UserSchima.method.createJWT = function () {
-  return jwt.sign({ userId: this._id, name: this.name }, "jwtSecret", {
-    expiresIn: "30d",
-  });
+UserSchima.methods.createJWT = function () {
+  return jwt.sign(
+    { userId: this._id, name: this.name },
+    process.env.JWY_SECRET,
+    {
+      expiresIn: process.env.JWT_LIFETIME,
+    }
+  );
+};
+
+UserSchima.methods.comparePassword = async function (candidatePassword) {
+  const isMatch = await bcrypt.compare(candidatePassword, this.password);
+  return isMatch
 };
 
 module.exports = mongoose.model("User", UserSchima);
