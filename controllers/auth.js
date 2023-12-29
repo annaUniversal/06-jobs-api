@@ -26,6 +26,7 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const { email, password } = req.body;
+  
   if (!email || !password) {
     throw new BadRequestError("Please provide password, and email");
   }
@@ -43,6 +44,7 @@ const login = async (req, res) => {
   //comparing password
   
   const token = user.createJWT();
+  console.log("userId ", user._id)
   res.status(StatusCodes.OK).json({ user: { name: user.name }, token });
 };
 
