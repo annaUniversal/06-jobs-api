@@ -1,0 +1,241 @@
+openapi: 3.0.0
+info:
+  title: tasks API
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://jobs-api-annager.onrender.com/api/v1
+  variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RegisterUserRequest'
+              - example:
+                  name: test2
+                  email: test2@test.com
+                  password: testtest2
+            example:
+              name: test2
+              email: test2@test.com
+              password: testtest2
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: Llogin user
+      operationId: Lloginuser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LloginuserRequest'
+              - example:
+                  email: test@test.com
+                  password: testtest
+            example:
+              email: test@test.com
+              password: testtest
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /tasks:
+    post:
+      tags:
+      - tasks
+      summary: Create Tsks
+      operationId: CreateTsks
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateTsksRequest'
+              - example:
+                  category: Bobrvgdr2
+                  taskName: Bobf rsdgwDCdf dxghfgSdfxg dfx drg1
+            example:
+              category: Bobrvgdr2
+              taskName: Bobf rsdgwDCdf dxghfgSdfxg dfx drg1
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - tasks
+      summary: Get All Tasks
+      operationId: GetAllTasks
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /tasks/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The task ID
+    get:
+      tags:
+      - tasks
+      summary: Get a single task
+      operationId: Getasingletask
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    patch:
+      tags:
+      - tasks
+      summary: Update a task
+      operationId: Updateatask
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateataskRequest'
+              - example:
+                  category: DFGD cdzxczx
+                  taskName: NotBowrfs gbfsvx fbdnc
+            example:
+              category: DFGD cdzxczx
+              taskName: NotBowrfs gbfsvx fbdnc
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+
+    delete:
+      tags:
+      - tasks
+      summary: Delete a task
+      operationId: Deleteatask
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+components:
+  schemas:
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: test2
+        email: test2@test.com
+        password: testtest2
+    LloginuserRequest:
+      title: LloginuserRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: test@test.com
+        password: testtest
+    CreateTsksRequest:
+      title: CreateTsksRequest
+      required:
+      - category
+      - taskName
+      type: object
+      properties:
+        category:
+          type: string
+        taskName:
+          type: string
+      example:
+        category: Bobrvgdr2
+        taskName: Bobf rsdgwDCdf dxghfgSdfxg dfx drg1
+    UpdateataskRequest:
+      title: UpdateataskRequest
+      required:
+      - category
+      - taskName
+      type: object
+      properties:
+        category:
+          type: string
+        taskName:
+          type: string
+      example:
+        category: DFGD cdzxczx
+        taskName: NotBowrfs gbfsvx fbdnc
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+
+- name: Auth
+  description: ''
+- name: tasks
+  description: ''
