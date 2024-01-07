@@ -18,7 +18,7 @@ const TaskSchema = new mongoose.Schema({
   },
   createdBy:{
     type:mongoose.Types.ObjectId,
-    ref:'Usre',
+    ref:'User',
     required: [true, "Please, provide the user"],
   }
 },{timestamps:true});
