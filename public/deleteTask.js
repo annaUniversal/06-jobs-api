@@ -19,9 +19,9 @@ export const deleteTask = async (taskId) => {
     message.textContent = "The task was deleted.";
     console.log('Deleting task')
     showTasks();
-    enableInput(true);
   } catch (err) {
     console.log(err);
     message.textContent = "A communication error occurred.";
   }
+  enableInput(true);
 };
